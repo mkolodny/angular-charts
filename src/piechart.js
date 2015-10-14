@@ -89,7 +89,6 @@ angular.module('piechart', [])
       require: '^piechart',
       replace: true,
       templateNamespace: 'svg',
-      templateUrl: 'template/piechart-slice.html',
       template: ''+
         '<path ng-attr-d="M0,0l{{arc.start.x}},{{arc.start.y}}a1,1,1,{{arc.large ? 1 : 0}},1,{{arc.end.x - arc.start.x}},{{arc.end.y - arc.start.y}}Z">'+
             '<animate '+
