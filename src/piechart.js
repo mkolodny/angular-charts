@@ -69,7 +69,13 @@ angular.module('piechart', [])
       restrict: 'EA',
       replace: true,
       controller: 'PiechartController',
-      templateUrl: 'template/piechart.html',
+      template: ''+
+        '<svg ng-attr-height="{{radius * 2 + 10}}" ng-attr-width="{{radius * 2 + 10}}">'+
+            '<g ng-attr-transform="translate({{radius}}, {{radius}}), scale({{radius}})" '+
+                'ng-attr-stroke-width="{{1 / radius}}" '+
+                'ng-transclude>'+
+            '</g>'+
+        '</svg>',
       transclude: true,
       scope: {
         radius: '@'
@@ -84,6 +90,21 @@ angular.module('piechart', [])
       replace: true,
       templateNamespace: 'svg',
       templateUrl: 'template/piechart-slice.html',
+      template: ''+
+        '<path ng-attr-d="M0,0l{{arc.start.x}},{{arc.start.y}}a1,1,1,{{arc.large ? 1 : 0}},1,{{arc.end.x - arc.start.x}},{{arc.end.y - arc.start.y}}Z">'+
+            '<animate '+
+                'attributeName="d" '+
+                'ng-attr-to="M{{arc.mid.x}},{{arc.mid.y}}l{{arc.start.x}},{{arc.start.y}}a1,1,1,{{arc.large ? 1 : 0}},1,{{arc.end.x - arc.start.x}},{{arc.end.y - arc.start.y}}Z" '+
+                'dur="0.25" '+
+                'begin="mouseover" '+
+                'fill="freeze" />'+
+            '<animate '+
+                'attributeName="d" '+
+                'ng-attr-to="M0,0l{{arc.start.x}},{{arc.start.y}}a1,1,1,{{arc.large ? 1 : 0}},1,{{arc.end.x - arc.start.x}},{{arc.end.y - arc.start.y}}Z" '+
+                'dur="0.25" '+
+                'begin="mouseout" '+
+                'fill="freeze" />'+
+        '</path>',
       scope: {
         value: '@'
       },
@@ -98,4 +119,3 @@ angular.module('piechart', [])
       }
     };
   });
-      
